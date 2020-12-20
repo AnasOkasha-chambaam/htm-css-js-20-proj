@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/progress.css" />
+    <link rel="stylesheet" href="./css//style.css" />
+    <title>Custom Video Player</title>
+    <script
+      src="https://kit.fontawesome.com/f5cfca52f2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 style="color: #eeeeee">Custom Video Player</h1>
+      <video
+        src="./video/enjoy.mp4"
+        id="video"
+        class="screen"
+        poster="./img/clrful-poster-.png"
+      ></video>
+      <div class="controls">
+        <button id="play" class="btn">
+          <i class="fa fa-play fa-2x"></i>
+        </button>
+        <button id="stop" class="btn">
+          <i class="fa fa-stop fa-2x"></i>
+        </button>
+        <input
+          type="range"
+          name="range"
+          id="progress"
+          class="progress"
+          min="0"
+          max="100"
+          step="0.1"
+          value="0"
+        />
+        <span class="timestamp" id="timestamp">00:00</span>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>

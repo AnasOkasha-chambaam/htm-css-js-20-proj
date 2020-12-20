@@ -1,0 +1,180 @@
+/* 5792cf */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background: linear-gradient(to top right,black, white) */
+    background-color: #e6e6e6;
+}
+
+.container .content {
+    background-color: #f9f9f9;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 2fr 1fr;
+    max-width: 800px;
+    box-shadow: rgb(29, 29, 29) 0px 10px 20px;
+    border-radius: 9px;
+}
+
+.container .content .img {
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-self: center; */
+    background: url('./pexels-tatiana-fet-1105766.jpg') no-repeat center center/cover;
+    position: relative;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+}
+
+.img::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.219);
+    z-index: 1;
+
+}
+
+.img p {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 22px;
+    z-index: 2;
+    font-size: 39px;
+    line-height: 60px;
+}
+
+.unique {
+    /* background-color: rgb(207, 137, 6); */
+    background-color: transparent;
+    color: #3498db;
+    padding: 8px;
+    padding-top: 0
+}
+
+.container .content .form {
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: rgb(29, 29, 29);
+    color: rgb(104, 104, 104);
+    font-family: 'Roboto Mono', monospace;
+    box-shadow: #3498db -10px 0px 20px;
+    border-radius: 9px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.container .content .form .input-field {
+    margin: 5px 0px;
+}
+
+.container .content .form .input-field label {
+    padding-left: 5px
+}
+
+.form .input-field input,
+.form .input-field .alert {
+    display: block;
+    font-family: 'Roboto Mono', monospace;
+}
+
+.form .input-field input {
+    width: 100%;
+    padding: 4px;
+    margin: 5px 0;
+    border-width: 1px;
+    border-color: rgb(29, 29, 29);
+    border-style: solid;
+}
+
+.form .input-field input:focus {
+    border-width: 0.2px !important;
+    border-color: #3498db !important;
+    outline: none;
+}
+
+.form .input-field .alert {
+    /* display: none; */
+    visibility: hidden;
+    font-size: 11px
+}
+
+.form .btns input {
+    padding: 8px;
+    font: inherit;
+    font-size: 11px;
+    border-color: transparent;
+    outline: none;
+    background-color: #f9f9f9;
+    color: rgb(29, 29, 29);
+    cursor: pointer;
+    /* width: 45%; */
+}
+
+.form .btns input[value="Register now"] {
+    /* color: #3498db */
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 4px;
+    transition-property: background color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+
+.form .btns input[value="Register now"]:hover {
+    background-color: #2a7cb3;
+}
+
+.form .btns input[value="Register now"]:active {
+    background-color: #fff;
+    color: #3498db;
+}
+
+/* Success and failure styling */
+.input-field>input {
+    border-color: rgb(29, 29, 29);
+}
+
+.input-field>span {
+    visibility: hidden;
+}
+
+.input-field.failed>input {
+    border-color: rgb(163, 64, 64);
+}
+
+.input-field.failed>span {
+    visibility: visible !important;
+    color: rgb(163, 64, 64)
+}
+
+.input-field.success>input {
+    border-color: rgb(76, 163, 64);
+}
+
+.input-field.success>span {
+    visibility: hidden !important;
+    color: rgb(163, 64, 64)
+}

@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+:root {
+  --primary-color: #3d405b;
+  --secondary-color: #e07a5f;
+  --drk-sec-color: #a75b46;
+  --cafe-color: #fefae0;
+  --drk-color: #03071e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "JetBrains Mono", monospace;
+  color: var(--drk-color);
+  background-color: #f3f3f3;
+  transition-property: transform;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.79, 0.12, 0.04, 0.78);
+  overflow-x: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--cafe-color);
+}
+
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.main-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 32px 0px;
+  background-color: var(--primary-color);
+  color: var(--cafe-color);
+}
+
+.main-header p {
+  margin: 20px 0;
+}
+
+#app {
+  background-color: transparent;
+}
+.btn {
+  background-color: var(--secondary-color);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition-property: background;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.96, 0.85, 0.59, 1.71);
+  color: var(--cafe-color);
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: var(--drk-sec-color);
+}
+
+.btn:active {
+  background-color: var(--primary-color);
+  color: var(--cafe-color);
+  border-color: var(--secondary-color);
+}
+
+#app .glitch {
+  font-size: 1.1rem;
+}
+
+button.toggle-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.dash {
+  background-color: var(--cafe-color);
+  width: 31px;
+  height: 3px;
+  border-radius: 5px;
+  /* opacity: 0; */
+  position: relative;
+  transition-property: transform width background;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.86, 1.81, 0.73, 0.69);
+}
+
+.dash::before {
+  content: "";
+  background-color: var(--cafe-color);
+  z-index: 9;
+  width: 25px;
+  height: 3px;
+  display: block;
+  transform: translateY(-7px);
+  transition-property: transform width;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.86, 1.81, 0.73, 0.69);
+}
+.dash::after {
+  content: "";
+  background-color: var(--cafe-color);
+  z-index: 9;
+  width: 25px;
+  height: 3px;
+  display: block;
+  transform: translateY(4px);
+  transition-property: transform width;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.86, 1.81, 0.73, 0.69);
+}
+
+.toggle-bar {
+  border-radius: 0;
+  padding: 12px 6px;
+}
+
+body.bar-toggled .toggle-bar,
+#close-modal {
+  background-color: var(--primary-color);
+  color: var(--cafe-color);
+  border-color: var(--secondary-color);
+}
+#close-modal {
+  border: none;
+}
+body.bar-toggled .toggle-bar .dash,
+#close-modal .dash {
+  transform: rotate(135deg);
+  width: 25px;
+  background-color: #f94144;
+}
+body.bar-toggled .toggle-bar .dash::before,
+#close-modal .dash::before {
+  transform: rotate(-270deg);
+  background-color: #f94144;
+}
+body.bar-toggled .toggle-bar .dash::after,
+#close-modal .dash::after {
+  transform: translateY(-3px) rotate(360deg);
+  background-color: #f94144;
+}
+
+.side-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  height: 100%;
+  width: 250px;
+  border-right: 1px solid var(--cafe-color);
+  transform: translateX(-100%);
+  transition: 0.4s cubic-bezier(0.79, 0.12, 0.04, 0.78);
+}
+
+.side-bar img {
+  width: 140px;
+  display: block;
+  margin: 20px auto;
+  box-shadow: 1px 1px 10px var(--drk-color);
+}
+
+.categories {
+  border-top: 1px solid var(--drk-color);
+  padding-top: 7px;
+}
+
+.categories .categorie a {
+  width: 100%;
+  padding: 2px 17px;
+  display: block;
+  margin-bottom: 5px;
+  position: relative;
+  overflow-x: hidden;
+  transition: 0.4s cubic-bezier(0.79, 0.12, 0.04, 0.78);
+}
+
+.categories .categorie a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  bottom: 0;
+  /* right: 0; */
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color);
+  z-index: -1;
+  transition: 0.4s cubic-bezier(0.79, 0.12, 0.04, 0.78);
+}
+
+.categories .categorie a:hover,
+.categories .categorie a.selected {
+  color: var(--drk-color);
+}
+
+.categories .categorie a:hover::before,
+.categories .categorie a.selected::before {
+  left: 0;
+}
+
+body.bar-toggled {
+  transform: translateX(250px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  padding: 10px 160px;
+}
+
+.container h2 {
+  margin: 26px 0 12px 0;
+}
+
+.container ul {
+  list-style: disc;
+  margin-bottom: 10px;
+}
+
+.modal-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(3, 7, 30, 0.315);
+  color: var(--drk-color);
+  display: none;
+}
+
+.modal-container .modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: #f3f3f3;
+  transform: translate(-50%, -50%);
+  border-bottom: 4px solid var(--drk-sec-color);
+  padding: 0 0px;
+  padding-bottom: 10px;
+  width: calc(max-content + 10px);
+  opacity: 0.1;
+  transform: translateY(120px) rotateY(90deg);
+  animation: modal-anim 0.4s cubic-bezier(0.4, 0.27, 0.44, 1.64) forwards;
+}
+
+@keyframes modal-anim {
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal #close-modal {
+  position: absolute;
+  right: 0px;
+  top: 5px;
+}
+
+.modal h3 {
+  background-color: var(--primary-color);
+  color: var(--cafe-color);
+  padding: 6px 6px;
+  margin-bottom: 10px;
+}
+
+.modal form {
+  display: block;
+  margin: 5px 15px;
+}
+
+.modal form p {
+  font-size: 14px;
+}
+
+.modal form .input-field {
+  margin: 20px 0;
+}
+
+.input-field label {
+  display: block;
+  padding-left: 3px;
+}
+
+.input-field input {
+  width: 96%;
+  padding: 9px;
+  border: none;
+  font-size: 15px;
+  color: var(--drk-color);
+  margin-top: 4px;
+  outline: none;
+}
+
+body.modal-toggled .modal-container {
+  display: block;
+}

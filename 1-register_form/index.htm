@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Sansita+Swashed&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <title>Register Form</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="img">
+                <p>Enter your information to be <span class="unique"> registered...</span></p>
+            </div>
+            <div class="form">
+                <form id="the-form" action="">
+                    <div class="input-field">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="full name">
+                        <span class="alert" id="name">This is a test alert</span>
+                    </div>
+                    <div class="input-field">
+                        <label for="email">Your E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="Your email">
+                        <span class="alert" id="email">This is a test alert</span>
+                    </div>
+                    <div class="input-field">
+                        <label for="password-1">Password</label>
+                        <input type="password" id="password-1" name="password-1" placeholder="Password">
+                        <span class="alert" id="pass-1">This is a test alert</span>
+                    </div>
+                    <div class="input-field">
+                        <label for="password-2">Re-Enter Password</label>
+                        <input type="password" id="password-2" name="password-2" placeholder="Password">
+                        <span class="alert" id="pass-2">This is a test alert</span>
+                    </div>
+                    <div class="btns">
+                        <input type="reset" id="res" value="Reset fields">
+                        <input type="submit" id="sub" value="Register now">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

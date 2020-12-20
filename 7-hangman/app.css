@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+:root {
+  --prim-clr: #2a9d8f;
+  --sec-clr: #2a729d;
+  --thi-clr: #2a9d55;
+  --wt-clr: #fdfdff;
+  --warning-clr: #9d2a38;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  transition: height 0.4s;
+}
+
+ul li {
+  list-style: none;
+  padding: 10px;
+  background-color: var(--warning-clr);
+  margin-bottom: 5px;
+  color: var(--wt-clr);
+  transition: 0.4s;
+  border-radius: 5px;
+  transform: scale(1.2) translateY(120px);
+  opacity: 1;
+  height: 0px;
+  pointer-events: none;
+  animation: warning-animation 1.6s cubic-bezier(0.25, 0.26, 0.46, 1.4) forwards;
+}
+
+@keyframes warning-animation {
+  25% {
+    opacity: 1;
+    pointer-events: all;
+    height: 100%;
+    transform: none;
+  }
+  75% {
+    opacity: 1;
+    pointer-events: all;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.2) translateY(-120px);
+  }
+}
+
+.the-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--prim-clr);
+  color: var(--wt-clr);
+  text-align: center;
+  font-size: 22px;
+  font-family: "Roboto", sans-serif;
+}
+
+.the-content .header {
+  font-size: 4.5rem;
+  text-shadow: 0 0 10px var(--sec-clr);
+  text-align: center;
+  max-width: max-content;
+  margin: 0 auto;
+}
+
+.the-content .sub-header {
+  font-size: 1.3rem;
+  max-width: max-content;
+  margin: 0 auto;
+}
+
+.game-container {
+  display: flex;
+  justify-content: start;
+  align-items: flex-start;
+  min-height: 350px;
+  width: 490px;
+  max-width: 490px;
+  position: relative;
+  padding: 20px;
+  margin: 10px auto;
+}
+
+line,
+circle {
+  stroke: var(--wt-clr);
+  stroke-width: 4px;
+  transition: 0.4s;
+  transition-timing-function: cubic-bezier(0.03, 0.47, 0.59, 1.84);
+}
+
+.man-part.shown {
+  stroke-dashoffset: 0 !important;
+}
+.wrong-letters {
+  position: absolute;
+  right: 20px;
+  top: 19px;
+}
+
+.the-word {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.the-word .letter {
+  display: inline-block;
+  min-width: 19px;
+  min-height: 35px;
+  font-size: 26px;
+  height: min-content;
+  width: min-content;
+  margin: 0 2px;
+  padding: 0 2px;
+  border-bottom: 3px solid var(--sec-clr);
+  overflow: hidden;
+}
+
+.the-word .letter > span {
+  display: inline-block;
+  transform: translateY(111px) rotateZ(-20deg);
+  animation: right-word 0.3s cubic-bezier(0.03, 0.47, 0.61, 1.35) forwards;
+  pointer-events: none;
+}
+
+@keyframes right-word {
+  40% {
+    transform: translateY(-4px) translateX(7px) rotateZ(-20deg);
+  }
+  60% {
+    transform: translateY(-8px) translateX(7px) rotateZ(-25deg);
+  }
+  75% {
+    transform: translateY(2px) translateX(7px) rotateZ(25deg);
+  }
+  100% {
+    transform: translateY(0px) translateX(0) rotateZ(0deg);
+  }
+}
+
+@media (max-width: 462px) {
+  .game-container {
+    min-height: 470px;
+    min-height: 410px;
+    width: auto;
+  }
+  .the-word .letter {
+    font-size: 20px;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(42, 115, 157, 0.281);
+  opacity: 0;
+  transition: 0.4s;
+  pointer-events: none;
+}
+
+.popup * {
+  transition: 0.4s;
+  transition-delay: 0s;
+}
+
+.popup .the-card {
+  background-color: var(--sec-clr);
+  max-width: 100%;
+  color: var(--wt-clr);
+  padding: 21px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 1px 1px 10px #333;
+  transition-property: transform;
+  transition-duration: 0.4s;
+  transition-timing-function: cubic-bezier(0.14, -0.02, 0.19, 0.94);
+  transform: translateY(280px);
+  opacity: 1;
+  pointer-events: none;
+  text-align: center;
+}
+
+.the-card p {
+  display: block;
+  margin: 10px auto;
+  pointer-events: none;
+  transition-delay: 0.1s;
+  transform: translateY(-200px);
+  opacity: 0;
+}
+
+.the-card button {
+  padding: 10px 8px;
+  font-weight: bold;
+  border: none;
+  display: block;
+  outline: none;
+  color: var(--wt-clr);
+  background-color: var(--thi-clr);
+  cursor: pointer;
+  pointer-events: none;
+  transition-delay: 0.2s;
+  transform: translateY(100px);
+}
+
+.popup.are-active {
+  opacity: 1;
+  pointer-events: all;
+}
+.popup.are-active * {
+  opacity: 1;
+  pointer-events: all;
+  transform: none;
+}
+
+.popup.are-active p {
+  transform: none;
+}
+
+.the-card button:hover {
+  box-shadow: 0 0 10px var(--prim-clr);
+}
+
+ul.used-mes {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.wrong-letters {
+  opacity: 0;
+  transition: 0.4s;
+  pointer-events: none;
+}
+.wrong-letters.shown {
+  opacity: 1;
+}
+
+.popup.are-active-w {
+  opacity: 1;
+  pointer-events: all;
+}
+.popup.are-active-w * {
+  opacity: 1;
+  pointer-events: all;
+  transform: none;
+}
+
+.popup.are-active-w p {
+  transform: none;
+}
+
+.popup.are-active-w .the-card {
+  background-color: var(--warning-clr);
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <!-- <style>/* DDFC74       3D0C11 */</style> -->
+
+    <title>Chemicals Cost Calculator</title>
+    <script
+      src="https://kit.fontawesome.com/f5cfca52f2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="showcase" id="the-very-first">
+      <h1 class="welcome">WELCOME</h1>
+      <div class="hr"></div>
+      <div class="the-form">
+        <form id="form">
+          <input type="text" placeholder="Name of substance" id="name-inp" />
+          <input type="number" placeholder="Cost of one gram" id="cost-inp" />
+          <input type="submit" value="Add to Chemicals" id="submitt" />
+        </form>
+      </div>
+    </div>
+    <div class="lists">
+      <div class="lft">
+        <h1 class="header">Chem List</h1>
+        <input
+          type="text"
+          class="filter"
+          placeholder="Search for a component"
+          id="filter"
+        />
+        <ul class="saved-items" id="chem-list">
+          <li class="item" id="item-1">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">1252</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-2">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-3">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-4">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-5">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-6">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-7">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-8">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-9">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-10">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-11">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+          <li class="item" id="item-12">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns"
+              ><span id="price">12</span
+              ><a href="#" id="edit"><i class="fas fa-pencil-alt"></i></a
+              ><a href="#" id="add"><i class="fas fa-plus"></i></a
+              ><a href="#" id="delete"><i class="fas fa-trash-alt"></i></a
+            ></span>
+          </li>
+        </ul>
+      </div>
+      <div class="rght">
+        <h1 class="header">Chem to Cook</h1>
+        <input
+          type="text"
+          class="results"
+          placeholder="Search for a component"
+          value="Total cost is 40 L.E"
+          id="total-cost"
+          disabled
+        />
+        <ul class="saved-items" id="to-cook-list">
+          <li class="item chosen" id="item-1">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" class="remove" id="add"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-2">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-3">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-4">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-5">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-6">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-7">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-8">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-9">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-10">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-11">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+          <li class="item chosen" id="item-12">
+            <span class="lft"> <span id="name">First Salt</span></span
+            ><span class="btns">
+              <input id="amount" type="number" placeholder="Amount in gms" />
+              <a href="#" id="add" class="remove"><i class="fas fa-plus"></i></a
+            ></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="up-btn">
+      <a class="go-up" id="up-btnn" href="#the-very-first">
+        <i class="fas fa-level-up-alt"></i>
+      </a>
+    </div>
+    <div class="to-edit" id="to-edit">
+      <!-- <div class="content">
+        <div class="cont">
+          <input type="text" name="name" id="any">
+          <input type="number" name="value">
+          <input type="submit" id="edit" value="edit">
+          <a href="#" id="cancel"><i class="fas fa-plus"></i></a
+            >
+        </div>
+      </div> -->
+    </div>
+    <footer>
+      <p>
+        &copy; 2020 ChambaAAm || Contact Us:
+        <a
+          href="mailto:anasokashachama@gmail.com?subject=WebDevelopment"
+          target="_blank"
+          class="my-em"
+          >anasokashachama@gmail.com</a
+        >
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

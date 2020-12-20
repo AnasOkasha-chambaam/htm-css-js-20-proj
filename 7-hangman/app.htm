@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app.css" />
+    <title>Hang Man Word Game</title>
+  </head>
+  <body>
+    <div class="the-container">
+      <div class="the-content">
+        <h1 class="header">Hangman</h1>
+        <h6 class="sub-header">
+          Find the hidden word <wbr /> - Enter a letter
+        </h6>
+        <div class="game-container">
+          <svg class="figure-container" width="230px" height="250px">
+            <line x1="90" x2="180" y1="20" y2="20" class="hanger" />
+            <line x1="93" x2="93" y1="20" y2="240" class="hanger" />
+            <line x1="36" x2="153" y1="240" y2="240" class="hanger" />
+            <line x1="177" x2="177" y1="20" y2="50" class="hanger" />
+            <!-- the body -->
+            <circle
+              cy="70"
+              cx="177"
+              r="20"
+              fill="transparent"
+              class="man-part"
+            />
+            <line x1="177" x2="177" y1="90" y2="140" class="man-part" />
+            <line x1="177" x2="202" y1="100" y2="125" class="man-part" />
+            <line x1="177" x2="152" y1="100" y2="125" class="man-part" />
+            <line x1="177" x2="152" y1="137" y2="165" class="man-part" />
+            <line x1="177" x2="202" y1="137" y2="165" class="man-part" />
+          </svg>
+          <div class="wrong-letters shown" id="wrong-letters">
+            wrong <br />
+            <span id="wrong-letter"></span>
+          </div>
+          <div class="the-word" id="the-word"></div>
+        </div>
+      </div>
+    </div>
+    <div class="popup are-active-w" id="popup">
+      <div class="the-card" id="the-card">
+        <p class="message" id="message">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste,
+          excepturi?
+        </p>
+        <button class="the-btn" id="play-again">PLAY AGAIN</button>
+      </div>
+    </div>
+    <ul class="used-mes" id="used-mes"></ul>
+    <script src="app.js"></script>
+  </body>
+</html>
