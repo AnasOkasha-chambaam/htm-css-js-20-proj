@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app.css" />
+    <title>Meal Finder</title>
+    <script
+      src="https://kit.fontawesome.com/f5cfca52f2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="app-content">
+        <div class="search-bar">
+          <h1 class="the-headline">Meal Finder App</h1>
+          <h3 class="sub-headlline">
+            Search a meal name or click random button to show random meals
+          </h3>
+          <div class="search-form">
+            <input type="text" id="search-inp" />
+            <button class="btn" id="search-btn">
+              <i class="fab fa-searchengin"></i>
+            </button>
+            <!-- <button class="btn" id="random-btn">
+              <i class="fas fa-random"></i>
+            </button> -->
+          </div>
+        </div>
+      </div>
+      <div class="results" id="results">
+        <!-- <h1>results</h1>
+        <div class="the-res mul">
+          <div class="img-1 w-1 h-1">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-2 w-1 h-2">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-3 w-3 h-1">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-4 w-1 h-3">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-5">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-6">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-7 w-2 h-1">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-8 w-2 h-2">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-9">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-10" data-mealId="1">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-11">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-12">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-13">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-14">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-15">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-16">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-17">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+          <div class="img-18">
+            <img src="https://source.unsplash.com/800x600/?nature" />
+            <h3 class="name">Lorem ipsum dolor sit amet.</h3>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <svg preserveAspectRatio="xMinYMin meet" class="the-wavy-bg">
+      <path d="M0,100 C150,200 350,0 500,100 L500,00 L0,0 Z"></path>
+    </svg>
+    <div class="meal-info-modal" id="meal-info-modal">
+      <div class="modal-content">
+        <div class="curr-img">
+          <img src="https://source.unsplash.com/800x600/?nature" />
+          <a>
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+        <h3 class="curr-name">Lorem ipsum dolor sit amet.</h3>
+        <div class="ingredients">
+          <p class="items">
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+            <span class="item"> spam </span>
+          </p>
+        </div>
+        <div class="method">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque
+            accusantium eos, dignissimos, vel veritatis aspernatur fugit esse
+            earum soluta deserunt odit, animi iste laboriosam cumque eum nostrum
+            nam doloremque est.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
