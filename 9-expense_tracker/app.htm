@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="app.css" />
+    <title>Expense Tracker || baAAm</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <h2>Expense Tracker</h2>
+        <div class="total-balance">
+          <p class="total">
+            Your Balance <br />
+            <span id="total-money">$0.00</span>
+          </p>
+          <div class="income-expense">
+            <p class="total">
+              INCOME<br />
+              <span id="total-income">$0.00</span>
+            </p>
+            <p class="total">
+              EXPENSE<br />
+              <span id="total-expense">$0.00</span>
+            </p>
+          </div>
+        </div>
+        <ul id="history">
+          <li class="the-head">Histroy</li>
+          <li class="plus money">$123.23</li>
+          <li class="minus money">$12.99</li>
+          <li class="plus money">$198.28</li>
+          <li class="minus money">$45.30</li>
+        </ul>
+        <form class="add-form">
+          <p class="the-head">Add New Transaction</p>
+          <div class="input-div">
+            <label for="name">Transaction name</label>
+            <input type="text" id="name" placeholder="ex:- cash" />
+          </div>
+          <div class="input-div">
+            <label for="amount">Transaction value</label>
+            <span>
+              <span class="sign-count">
+                <input type="checkbox" name="sign" id="the-sign" />
+                <span class="dash-cont"><span class="dash"></span></span>
+              </span>
+              <input type="number" id="amount" placeholder="ex:- 100" />
+            </span>
+          </div>
+          <input type="submit" value="Add transaction" />
+        </form>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
