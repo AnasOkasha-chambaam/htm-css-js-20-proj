@@ -78,6 +78,8 @@ form.addEventListener("submit", (e) => {
   LS.saveLogs(LSLogs);
   UI.showLog(newLog);
   UI.showIncExp();
+  nameInp.value = "";
+  amountInp.value = "";
 });
 
 UI.setTheApp();

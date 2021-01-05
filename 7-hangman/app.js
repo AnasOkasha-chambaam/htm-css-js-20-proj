@@ -123,6 +123,9 @@ document.body.addEventListener("keydown", (e) => {
           correctLs.push(e.key);
           livesCounter--;
           UI.setTheWord();
+          if (livesCounter < 0) {
+            livesCounter = 0;
+          }
         } else {
           wrongLs.push(e.key);
           livesCounter++;
