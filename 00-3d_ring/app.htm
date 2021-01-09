@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --prim-clr: #118ab2;
+        --sec-clr: #ef476f;
+        --wt-clr: #f4f4f4;
+        --drk-clr: #333;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--prim-clr);
+        color: var(--wt-clr);
+        font-size: 4rem;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+      }
+      body .split-this {
+        transform-style: preserve-3d;
+        transform: perspective(1000px);
+        animation: rot 8s linear forwards infinite;
+      }
+      @keyframes rot {
+        0% {
+          transform: perspective(1000px) rotateY(360deg) rotateZ(15deg);
+        }
+        100% {
+          transform: perspective(1000px) rotateY(0deg) rotateZ(15deg);
+        }
+      }
+      .split-this .char {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 110px;
+        height: 110px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--sec-clr);
+        border-top: 9px solid var(--wt-clr);
+        border-bottom: 9px solid var(--wt-clr);
+        /* transform: rotateY(calc((360deg / 11) * (var(--i) + 1))); */
+        transform-origin: center;
+        transform-style: preserve-3d;
+        transform: rotateY(calc(var(--i) * 32.72727272727273deg))
+          translateZ(185px);
+      }
+    </style>
+    <title>3D Ring</title>
+  </head>
+  <body>
+    <div class="split-this">any-any any</div>
+    <script>
+      const toSplit = document.querySelector(".split-this");
+      function split() {
+        if (toSplit) {
+          let txt = toSplit.innerText;
+          toSplit.innerText = "";
+          let anoSpan = document.createElement("span");
+          anoSpan.className = "cont";
+          txt.split("").forEach((one, ind) => {
+            let span = document.createElement("span");
+            span.setAttribute("style", `--i: ${ind};`);
+            span.setAttribute("data-char", `${one}`);
+            span.className = "char";
+            span.innerHTML = `${one}`;
+            anoSpan.appendChild(span);
+          });
+          toSplit.appendChild(anoSpan);
+        }
+      }
+      split();
+    </script>
+  </body>
+</html>
