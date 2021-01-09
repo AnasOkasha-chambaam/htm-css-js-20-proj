@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+        background-color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* transform-style: preserve-3d; */
+        perspective: 1000px;
+      }
+      .cont {
+        transform: rotateX(0) rotateZ(0);
+        transform-style: preserve-3d;
+        position: relative;
+        animation: anim 10s linear 1s infinite forwards;
+      }
+      .circle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: #f4f4f4;
+        transform: translate(100%, -50%) rotateY(0);
+        transform-origin: -100% 50%;
+        transform-style: preserve-3d;
+        /* animation: donate 1s linear 1s infinite forwards; */
+        z-index: 9;
+      }
+      @keyframes donate {
+        100% {
+          transform: translate(100%, -50%) rotateY(720deg);
+        }
+      }
+      @keyframes anim {
+        100% {
+          transform: rotateX(360deg) rotateZ(720deg);
+        }
+      }
+    </style>
+    <title>A Donate</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="cont" id="any">
+        <div class="circle"></div>
+      </div>
+    </div>
+    <script>
+      let i = 0;
+      
+    </script>
+  </body>
+</html>
