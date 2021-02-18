@@ -1,0 +1,313 @@
+// -webkit-clip-path: polygon(100% 1%, 100% 41%, 50% 63%, 0 41%, 0 0);
+// clip-path: polygon(100% 1%, 100% 41%, 50% 63%, 0 41%, 0 0);
+@import url("https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap");
+$prim-clr: #fec89a;
+$comp-clr: #9ad0fe;
+$mono-clr: #feac67;
+$sec-clr: #9afec8;
+$thi-clr: #c89afe;
+$wt-clr: #f0efeb;
+$drk-clr: #22223b;
+$clip-p: polygon(100% 0%, 100% 70%, 50% 100%, 50% 100%, 0 70%, 0 0);
+$clip-p-h: polygon(100% 0%, 100% 100%, 72% 90%, 28% 90%, 0 100%, 0 0);
+$cubbzer: cubic-bezier(0.6, 0.43, 0.25, 0.81);
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+li {
+	list-style: none;
+}
+
+.app-container {
+	width: 100%;
+	min-height: 100vh;
+	background-color: $wt-clr;
+	font-family: "Yusei Magic", sans-serif;
+	header {
+		min-height: 200px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		background-color: $prim-clr;
+		color: $drk-clr;
+		clip-path: $clip-p;
+		transition: clip-path 0.3s $cubbzer;
+		transform-style: preserve-3d;
+		h3 {
+			padding: 10px;
+			text-align: center;
+			display: block;
+		}
+		button {
+			outline: none;
+			border: 2px solid $comp-clr;
+			background-color: transparent;
+			color: $drk-clr;
+			padding: 8px;
+			transition: all 0.3s $cubbzer;
+			cursor: pointer;
+			transform-style: preserve-3d;
+			display: block;
+			position: relative;
+			&::after,
+			&::before {
+				content: "";
+				width: 0%;
+				height: 50%;
+				z-index: -1;
+				position: absolute;
+				top: 0;
+				right: 0;
+				transition: all 0.4s $cubbzer;
+				background-color: $comp-clr;
+			}
+			&::before {
+				top: unset;
+				right: unset;
+				bottom: 0;
+				left: 0;
+			}
+			&:hover {
+				// background-color:darken($color: $comp-clr, $amount: 10%);
+				// background-color: $comp-clr;
+				// box-shadow: 0 0 10px $comp-clr, 0 0 25px $comp-clr;
+				&::after,
+				&::before {
+					width: 100%;
+					left: 0;
+				}
+				&::before {
+					right: 0;
+					left: unset;
+				}
+			}
+		}
+		&:hover {
+			clip-path: $clip-p-h;
+			button {
+				transform: scale(1.3) translateZ(20px);
+			}
+		}
+	}
+	.results {
+		padding: 20px 20px 40px 20px;
+
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 10px;
+		.item {
+			display: flex;
+			flex-direction: column;
+			box-shadow: 0 0 10px $drk-clr;
+			transition: transform 0.4s $cubbzer;
+			overflow: hidden;
+			cursor: pointer;
+			img {
+				width: 100%;
+				object-fit: center;
+				transition: transform 0.4s $cubbzer;
+			}
+			.item-msg {
+				text-align: center;
+				background-color: $comp-clr;
+				padding: 5px;
+				z-index: 2;
+			}
+			&:hover {
+				img {
+					transform: scale(1.1);
+					transform-style: preserve-3d;
+				}
+			}
+		}
+	}
+}
+
+.settings {
+	width: 100%;
+	min-height: 100vh;
+	position: fixed;
+	background-color: rgba(34, 34, 59, 0.301);
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 10;
+	transition: 0.4s;
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(400px);
+	.set-container {
+		background-color: $wt-clr;
+		border-radius: 5px;
+		min-width: 50%;
+		transform: rotateZ(-90deg) translateX(30px);
+		transition: 0.2s;
+		.header,
+		.footer {
+			background-color: $mono-clr;
+			width: 100%;
+			height: 25px;
+			border: 1px solid transparent;
+		}
+		.header {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			span {
+				float: right;
+				height: 100%;
+				width: 25px;
+				border-top-right-radius: 5px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+				transition: 0.2s;
+				&::before {
+					content: "";
+					width: 0;
+					height: 0;
+					border-left: 8px solid $wt-clr;
+					border-right: 8px solid transparent;
+					border-top: 8px solid transparent;
+					border-bottom: 8px solid transparent;
+					transition: 0.2s;
+				}
+				&:hover {
+					background-color: rgba($color: #000000, $alpha: 0.1);
+					&::before {
+						transform: translateX(25%);
+					}
+				}
+			}
+		}
+		.footer {
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			text-align: center;
+			color: $wt-clr;
+			font-weight: bold;
+			transition: 0.2s;
+			cursor: pointer;
+			user-select: none;
+			&:hover {
+				background-color: darken($color: $mono-clr, $amount: 10%);
+			}
+			&:active {
+				background-color: $wt-clr;
+				color: $comp-clr;
+				border-color: $comp-clr;
+			}
+		}
+		.content {
+			padding: 10px 14px;
+			overflow: hidden;
+			padding: 0;
+			height: 0;
+			transition: 0.4s;
+			transition-delay: 0.78s;
+			.current-voice {
+				position: relative;
+				display: block;
+				user-select: none;
+				.active-voice {
+					background-color: $comp-clr;
+					color: $drk-clr;
+					padding: 5px;
+					margin: 5px 0;
+					cursor: pointer;
+					transition: 0.2s;
+					&:hover {
+						background-color: darken($color: $comp-clr, $amount: 10%);
+					}
+				}
+				ul {
+					position: absolute;
+					// opacity: 0;
+					min-width: 100%;
+					opacity: 0;
+					color: $wt-clr;
+					top: 120%;
+					// left: 50%;
+					max-height: 150px;
+					overflow-y: scroll;
+					padding: 5px 0;
+					transition: 0.4s;
+					transform: translateY(50%);
+					pointer-events: none;
+					&::before {
+						content: "";
+						width: 0;
+						height: 0;
+						top: 0;
+						left: 50%;
+						border: 8px solid transparent;
+						border-bottom: 8px solid $comp-clr;
+						position: absolute;
+						transform: translateX(-50%) translateY(-60%);
+						z-index: 0;
+					}
+					.voice {
+						padding: 4px;
+						background-color: $comp-clr;
+						color: $drk-clr;
+						border-bottom: 1px dashed #333;
+						font-size: 17px;
+						cursor: pointer;
+						transition: 0.2s;
+						&:hover {
+							background-color: lighten($color: $comp-clr, $amount: 10%);
+						}
+					}
+				}
+				&.choose {
+					ul {
+						pointer-events: all;
+						opacity: 1;
+						transform: none;
+					}
+				}
+			}
+			textarea {
+				width: 100%;
+			}
+		}
+	}
+}
+
+body.show-set {
+	.settings {
+		pointer-events: all;
+		opacity: 1;
+		transform: none;
+		.set-container {
+			animation-name: show-sett;
+			animation-delay: 0.4s;
+			animation-duration: 0.4s;
+			animation-timing-function: ease;
+			animation-fill-mode: forwards;
+			.content {
+				padding: 10px 14px;
+				height: 100%;
+			}
+		}
+	}
+}
+@keyframes show-sett {
+	50%{
+		transform: rotateZ(-90deg)
+	}
+	60%{
+		transform: rotateZ(-90deg)
+	}
+	100%{
+		transform: none;
+	}
+}

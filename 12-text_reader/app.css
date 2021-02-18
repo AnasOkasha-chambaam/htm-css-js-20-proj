@@ -1,0 +1,418 @@
+@import url("https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f0efeb;
+  font-family: "Yusei Magic", sans-serif;
+}
+
+.app-container header {
+  min-height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #fec89a;
+  color: #22223b;
+  -webkit-clip-path: polygon(100% 0%, 100% 70%, 50% 100%, 50% 100%, 0 70%, 0 0);
+          clip-path: polygon(100% 0%, 100% 70%, 50% 100%, 50% 100%, 0 70%, 0 0);
+  -webkit-transition: -webkit-clip-path 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: -webkit-clip-path 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: clip-path 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: clip-path 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81), -webkit-clip-path 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.app-container header h3 {
+  padding: 10px;
+  text-align: center;
+  display: block;
+}
+
+.app-container header button {
+  outline: none;
+  border: 2px solid #9ad0fe;
+  background-color: transparent;
+  color: #22223b;
+  padding: 8px;
+  -webkit-transition: all 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: all 0.3s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  cursor: pointer;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  display: block;
+  position: relative;
+}
+
+.app-container header button::after, .app-container header button::before {
+  content: "";
+  width: 0%;
+  height: 50%;
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transition: all 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: all 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  background-color: #9ad0fe;
+}
+
+.app-container header button::before {
+  top: unset;
+  right: unset;
+  bottom: 0;
+  left: 0;
+}
+
+.app-container header button:hover::after, .app-container header button:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.app-container header button:hover::before {
+  right: 0;
+  left: unset;
+}
+
+.app-container header:hover {
+  -webkit-clip-path: polygon(100% 0%, 100% 100%, 72% 90%, 28% 90%, 0 100%, 0 0);
+          clip-path: polygon(100% 0%, 100% 100%, 72% 90%, 28% 90%, 0 100%, 0 0);
+}
+
+.app-container header:hover button {
+  -webkit-transform: scale(1.3) translateZ(20px);
+          transform: scale(1.3) translateZ(20px);
+}
+
+.app-container .results {
+  padding: 20px 20px 40px 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(200px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.app-container .results .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 0 0 10px #22223b;
+          box-shadow: 0 0 10px #22223b;
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: -webkit-transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81), -webkit-transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.app-container .results .item img {
+  width: 100%;
+  -o-object-fit: center;
+     object-fit: center;
+  -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: -webkit-transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+  transition: transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81), -webkit-transform 0.4s cubic-bezier(0.6, 0.43, 0.25, 0.81);
+}
+
+.app-container .results .item .item-msg {
+  text-align: center;
+  background-color: #9ad0fe;
+  padding: 5px;
+  z-index: 2;
+}
+
+.app-container .results .item:hover img {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+.settings {
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  background-color: rgba(34, 34, 59, 0.301);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 10;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transform: translateY(400px);
+          transform: translateY(400px);
+}
+
+.settings .set-container {
+  background-color: #f0efeb;
+  border-radius: 5px;
+  min-width: 50%;
+  -webkit-transform: rotateZ(-90deg) translateX(30px);
+          transform: rotateZ(-90deg) translateX(30px);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.settings .set-container .header,
+.settings .set-container .footer {
+  background-color: #feac67;
+  width: 100%;
+  height: 25px;
+  border: 1px solid transparent;
+}
+
+.settings .set-container .header {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.settings .set-container .header span {
+  float: right;
+  height: 100%;
+  width: 25px;
+  border-top-right-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.settings .set-container .header span::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 8px solid #f0efeb;
+  border-right: 8px solid transparent;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.settings .set-container .header span:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.settings .set-container .header span:hover::before {
+  -webkit-transform: translateX(25%);
+          transform: translateX(25%);
+}
+
+.settings .set-container .footer {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  text-align: center;
+  color: #f0efeb;
+  font-weight: bold;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.settings .set-container .footer:hover {
+  background-color: #fe9034;
+}
+
+.settings .set-container .footer:active {
+  background-color: #f0efeb;
+  color: #9ad0fe;
+  border-color: #9ad0fe;
+}
+
+.settings .set-container .content {
+  padding: 10px 14px;
+  overflow: hidden;
+  padding: 0;
+  height: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  -webkit-transition-delay: 0.78s;
+          transition-delay: 0.78s;
+}
+
+.settings .set-container .content .current-voice {
+  position: relative;
+  display: block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.settings .set-container .content .current-voice .active-voice {
+  background-color: #9ad0fe;
+  color: #22223b;
+  padding: 5px;
+  margin: 5px 0;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.settings .set-container .content .current-voice .active-voice:hover {
+  background-color: #68b9fe;
+}
+
+.settings .set-container .content .current-voice ul {
+  position: absolute;
+  min-width: 100%;
+  opacity: 0;
+  color: #f0efeb;
+  top: 120%;
+  max-height: 150px;
+  overflow-y: scroll;
+  padding: 5px 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
+  pointer-events: none;
+}
+
+.settings .set-container .content .current-voice ul::before {
+  content: "";
+  width: 0;
+  height: 0;
+  top: 0;
+  left: 50%;
+  border: 8px solid transparent;
+  border-bottom: 8px solid #9ad0fe;
+  position: absolute;
+  -webkit-transform: translateX(-50%) translateY(-60%);
+          transform: translateX(-50%) translateY(-60%);
+  z-index: 0;
+}
+
+.settings .set-container .content .current-voice ul .voice {
+  padding: 4px;
+  background-color: #9ad0fe;
+  color: #22223b;
+  border-bottom: 1px dashed #333;
+  font-size: 17px;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.settings .set-container .content .current-voice ul .voice:hover {
+  background-color: #cde8ff;
+}
+
+.settings .set-container .content .current-voice.choose ul {
+  pointer-events: all;
+  opacity: 1;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.settings .set-container .content textarea {
+  width: 100%;
+}
+
+body.show-set .settings {
+  pointer-events: all;
+  opacity: 1;
+  -webkit-transform: none;
+          transform: none;
+}
+
+body.show-set .settings .set-container {
+  -webkit-animation-name: show-sett;
+          animation-name: show-sett;
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+  -webkit-animation-duration: 0.4s;
+          animation-duration: 0.4s;
+  -webkit-animation-timing-function: ease;
+          animation-timing-function: ease;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+body.show-set .settings .set-container .content {
+  padding: 10px 14px;
+  height: 100%;
+}
+
+@-webkit-keyframes show-sett {
+  50% {
+    -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+  }
+  60% {
+    -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+  }
+  100% {
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes show-sett {
+  50% {
+    -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+  }
+  60% {
+    -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+  }
+  100% {
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+/*# sourceMappingURL=app.css.map */

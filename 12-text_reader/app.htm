@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app.css" />
+    <title>Text Reader</title>
+  </head>
+  <body>
+    <section class="app-container">
+      <header>
+        <h3 class="description">
+          Click the button bellow to set the voice and listen to custom text.
+        </h3>
+        <button class="toggle-modul" id="toggle-modul">Settings</button>
+      </header>
+      <div class="results" id="results">
+        <div class="item" id="item-1">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-2">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-3">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-4">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-5">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-6">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-7">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-8">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-9">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-10">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-11">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+        <div class="item" id="item-12">
+          <img src="./img/school.jpg" />
+          <p class="item-msg">I am angry</p>
+        </div>
+      </div>
+    </section>
+    <section class="settings" id="settings">
+      <div class="set-container">
+        <div class="header"><span id="back"></span></div>
+        <div class="content">
+          <span class="current-voice">
+            <p class="active-voice">Any thing, sweety.</p>
+            <ul class="voices">
+              <li class="voice active">Any thing, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+              <li class="voice">any any any, sweety.</li>
+            </ul>
+          </span>
+          <textarea
+            name="text-to-speech"
+            id="to-talk"
+            cols="30"
+            rows="10"
+            placeholder="Type something to be said..."
+          ></textarea>
+        </div>
+        <div class="footer">speak</div>
+      </div>
+    </section>
+    <script src="./app.js"></script>
+  </body>
+</html>
