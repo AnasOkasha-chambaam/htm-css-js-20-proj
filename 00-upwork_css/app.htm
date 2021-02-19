@@ -27,26 +27,29 @@
     </style>
     <script>
       let st = "@import url('./any.css')";
-      function getAllStyles() {
+      async function getAllStyles() {
         let cssStyle = "",
           cssLink = "";
-        document.querySelectorAll("style").forEach((one) => {
-          cssStyle += one.innerHTML;
+        document.querySelectorAll("style").forEach(async (one) => {
+          await inlineSt(one.innerHTML);
           one.remove();
           // console.log(cssStyle.replace(/\/\*[^]*?\*\//g, ""));
         });
-        // document.querySelectorAll("link").forEach((one) => {
-        //   if (one.rel === "stylesheet") {
-        //     cssLink += `@import url('${one.href}');`;
-        //     // .match(/(\/[^\/]*\.css)/gione.remove();
-        //   }
-        // });
-        return cssLink + cssStyle;
+        document.querySelectorAll("link").forEach(async (one) => {
+          if (one.rel === "stylesheet") {
+            await inlineSt(`@import url('${one.href}')`);
+            // .match(/(\/[^\/]*\.css)/gione.remove();
+          }
+        });
+        return "nothing at all {}";
       }
       function setAnAtt(elm, attName, dataAttName, res, i) {
         let arr = [...elm.split(",")];
         arr.forEach((elementt) => {
           if (!elementt.match(/^\d/)) {
+            if (elementt.trim() === ".width-33") {
+              console.log(i);
+            }
             let theElm = document.querySelectorAll(elementt);
             if (theElm) {
               theElm.forEach((one) => {
@@ -79,72 +82,74 @@
         }
       }
       async function inlineSt(theHardSetSt) {
-        try {
-          let str = theHardSetSt || getAllStyles();
-          // if (!str) {
-          str = str.trim().replace(/\r?\n|\r/g, ""); // getting rid of line breaks
-          str = str.replace(/\/\*[^]*?\*\//g, "");
-          // }
-          if (str && /^[\w@\.\#\s]/.test(str)) {
-            // checking if there is words after cleaning the string from line breaks
+        // try {
+        let str = theHardSetSt || (await getAllStyles());
+        // if (!str) {
+        console.log(str);
+        str = str.replace(/(\/\*[^]*?\*\/|\/\/[.]+)/g, "");
+        str = str.trim().replace(/\r?\n|\r/g, ""); // getting rid of line breaks
+        // }
+        if (str && /^[\w@\.\#\s]/.test(str)) {
+          // checking if there is words after cleaning the string from line breaks
 
-            let res = str.split("{").map((one) => one.split("}")), // the array we are  going to work with which has the style of [[import or media query, elem1], [style of elem1, elem2]] if there is an empty element in the middle of the sub array then that means the past media query has finished
-              i = 0, // the iterator
-              dataAttName = ""; // if it has a value, then a media query will start
-            console.log("the res", res);
-            // console.log(res);
+          let res = str.split("{").map((one) => one.split("}")), // the array we are  going to work with which has the style of [[import or media query, elem1], [style of elem1, elem2]] if there is an empty element in the middle of the sub array then that means the past media query has finished
+            i = 0, // the iterator
+            dataAttName = ""; // if it has a value, then a media query will start
+          console.log("the res", res);
+          // console.log(res);
 
-            do {
-              if (res[i].length > 2) {
-                res[i].forEach((one) => {
-                  fetchExternalCss(one);
+          do {
+            if (res[i].length > 2) {
+              console.log("this is the res i", res[i]);
+              console.log("this is the res i i", i);
+              res[i].forEach((one) => {
+                fetchExternalCss(one);
+              });
+            }
+            let nwRes = res[i][res[i].length - 1].trim(); // name of the last index. it could be element or media query
+            // console.log(nwRes);
+            if (
+              res[i][res[i].length - 2] &&
+              res[i][res[i].length - 2].trim() === ""
+            ) {
+              // checking if the second element of the current sub arrayh is an empty element to set a new media query
+              dataAttName = "";
+            }
+            fetchExternalCss(nwRes, res, i);
+            nwRes = res[i][res[i].length - 1].trim();
+            // console.log("any", nwRes);
+            if (/^[\.#\w]/.test(nwRes.trim())) {
+              // tests if the line starts with . for class, # for id, a-z for the tag name
+              if (res[i].length == 1 && res[i - 1]) {
+                // checking if the array has a single elements and sets query if that is right
+                let mediaDimensions =
+                  res[i - 1][res[i - 1].length - 1].match(/\(([^]+?)\)/g) || []; // isolating the (max-width: 100px) and (min-height: 100px)
+                dataAttName = "";
+                mediaDimensions.forEach((one, ind) => {
+                  dataAttName += one
+                    .slice(1, one.length - 1)
+                    .split(":")
+                    .join("-")
+                    .replace(/\s/g, "");
+                  if (ind != mediaDimensions.length - 1) {
+                    // checking if there are other media query rules
+                    dataAttName += "-and-";
+                  }
                 });
               }
-              let nwRes = res[i][res[i].length - 1].trim(); // name of the last index. it could be element or media query
-              // console.log(nwRes);
-              if (
-                res[i][res[i].length - 2] &&
-                res[i][res[i].length - 2].trim() === ""
-              ) {
-                // checking if the second element of the current sub arrayh is an empty element to set a new media query
-                dataAttName = "";
+              if (dataAttName.length > 0) {
+                // checking if we are in a media query state
+                setAnAtt(nwRes, "data-media-", dataAttName, res, i);
+              } else {
+                setAnAtt(nwRes, "style", dataAttName, res, i);
               }
-              fetchExternalCss(nwRes, res, i);
-              nwRes = res[i][res[i].length - 1].trim();
-              // console.log("any", nwRes);
-              if (/^[\.#\w]/.test(nwRes.trim())) {
-                // tests if the line starts with . for class, # for id, a-z for the tag name
-                if (res[i].length == 1 && res[i - 1]) {
-                  // checking if the array has a single elements and sets query if that is right
-                  let mediaDimensions =
-                    res[i - 1][res[i - 1].length - 1].match(/\(([^]+?)\)/g) ||
-                    []; // isolating the (max-width: 100px) and (min-height: 100px)
-                  dataAttName = "";
-                  mediaDimensions.forEach((one, ind) => {
-                    dataAttName += one
-                      .slice(1, one.length - 1)
-                      .split(":")
-                      .join("-")
-                      .replace(/\s/g, "");
-                    if (ind != mediaDimensions.length - 1) {
-                      // checking if there are other media query rules
-                      dataAttName += "-and-";
-                    }
-                  });
-                }
-                if (dataAttName.length > 0) {
-                  // checking if we are in a media query state
-                  setAnAtt(nwRes, "data-media-", dataAttName, res, i);
-                } else {
-                  setAnAtt(nwRes, "style", dataAttName, res, i);
-                }
-              }
-              i++; // increasing the iterator by one
-            } while (res[i] && res[i][res[i].length - 1]);
-          }
-        } catch (error) {
-          console.log(error);
+            }
+            i++; // increasing the iterator by one
+          } while (res[i] && res[i][res[i].length - 1]);
         }
+        // } catch (error) {
+        //   console.log(error);
+        // }
       }
 
       window.addEventListener("DOMContentLoaded", async (e) => {
