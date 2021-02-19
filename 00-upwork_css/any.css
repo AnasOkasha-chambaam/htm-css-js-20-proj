@@ -1,3 +1,55 @@
 body {
-  margin: 50px;
+  margin: 0px;
+  background: white;
+  font-family: arial, san-senf;
+  font-size: 110%;
+}
+.head,
+.subtitle_div,
+.head h2 {
+  background: #f1cc0c;
+  color: white !important;
+  padding: 0px;
+}
+.logo_div {
+  display: inline-block;
+  max-width: 70px;
+  margin: 0px 3px;
+}
+.title {
+  display: inline-block;
+  vertical-align: top;
+}
+.title h2 {
+  margin: 0;
+  white-space: pre;
+}
+@media screen and (max-width: 500px) {
+  .img_overview {
+    width: 100% !important;
+  }
+  .search_topic_input,
+  .classDivSearch {
+    width: 100%;
+  }
+  .logo_div {
+    width: 30%;
+  }
+  .title {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 400px) {
+  .subtitle_div {
+    display: none;
+  }
+}
+@media screen and (max-width: 600px) {
+  .logo_div {
+    padding-top: 20px;
+  }
+  .title h2 {
+    line-hight: 1;
+    padding-top: 26px;
+  }
 }
