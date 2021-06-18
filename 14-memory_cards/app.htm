@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./app.css" />
+    <title>Memory Cards Game</title>
+  </head>
+  <body>
+    <aside>
+      <ul class="categories" id="categ-list">
+        <!-- <li class="categ" data-id="categ@1">
+          <span class="color"></span> Chemistry
+          <span class="cards-number">1</span>
+        </li>
+        <li class="categ">
+          <span class="color"></span> Chemistry
+          <span class="cards-number">2</span>
+        </li>
+        <li class="categ">
+          <span class="color"></span> Chemistry
+          <span class="cards-number">3</span>
+        </li>
+        <li class="categ">
+          <span class="color"></span> Chemistry
+          <span class="cards-number">4</span>
+        </li>
+        <li class="categ">
+          <span class="color"></span> Chemistry
+          <span class="cards-number">5</span>
+        </li> -->
+      </ul>
+      <form id="adding-categ" class="aactive">
+        <input type="text" name="name-of-categ" id="new-categ-name" />
+        <span class="a-div">
+          <input type="submit" value="add" id="submit" />
+          <input type="button" value="cancel" id="cancel-adding-categ" />
+        </span>
+        <button id="add-new-categ" class="add-new-categ">
+          Add a new categorie
+        </button>
+      </form>
+    </aside>
+    <section id="categ-cards" class="categ-cards zero-categ">
+      <span class="a-div no-cards no-categ">
+        <h1>Select a categorie</h1>
+      </span>
+      <span class="a-div no-cards">
+        <h1>Add some cards</h1>
+        <button id="add-card" data-categ-id="categ@1">Add a card</button>
+      </span>
+      <span class="a-div with-cards">
+        <span class="a-div container">
+          <h1><span id="categ-name">Chemistry</span> cards</h1>
+          <button id="add-card" data-categ-id="categ@1">Add a card</button>
+          <span class="a-div cards-container">
+            <ul id="cards-list" class="cards">
+              <li class="card current">
+                <span class="a-div inner-card">
+                  <span class="a-div inner-front"> Any thing ? </span>
+                  <span class="a-div inner-back"> No thanks </span>
+                </span>
+              </li>
+            </ul>
+            <span class="a-div back-forward">
+              <span class="a-div" id="back">
+                <span class="a-div steak"></span
+                ><span class="a-div steak"></span>
+              </span>
+              <p>1 / 2</p>
+              <span class="a-div" id="forward">
+                <span class="a-div steak"></span
+                ><span class="a-div steak"></span>
+              </span>
+            </span>
+          </span>
+        </span>
+        <button id="delete-all-cards">Delete All Categ Cards</button>
+      </span>
+    </section>
+    <section id="adding-card-module">
+      <span class="a-div content">
+        <span class="cancel">
+          <span class="a-div steak"></span>
+          <span class="a-div steak"></span>
+        </span>
+        <h1>Add a New Card</h1>
+        <form id="adding-card-form">
+          <label for="quez">Question (on the card face)</label>
+          <input type="text" name="quez" id="adding-card-face" />
+          <label for="ans">Answer (on the card back)</label>
+          <textarea name="ans" id="adding-card-back"></textarea>
+          <input type="submit" value="click to add" />
+        </form>
+      </span>
+    </section>
+    <script src="app.js"></script>
+  </body>
+</html>

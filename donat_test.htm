@@ -60,7 +60,24 @@
     </div>
     <script>
       let i = 0;
-      
+      fetch("https://google-translate1.p.rapidapi.com/language/translate/v2", {
+	"method": "POST",
+	"headers": {
+		"x-rapidapi-key": "aba56c2cb2mshfe15871190b7a84p174f6cjsn3ca2dff3c807",
+		"x-rapidapi-host": "google-translate1.p.rapidapi.com"
+	},
+	"body": {
+		"q": "Hello, world!",
+		"target": "es",
+		"source": "en"
+	}
+})
+.then(response => {
+	console.log('222',response);
+})
+.catch(err => {
+	console.error('WER',err);
+});
     </script>
   </body>
 </html>

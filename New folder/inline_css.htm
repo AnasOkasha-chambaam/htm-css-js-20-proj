@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./any.css" />
+    <style>
+      /* @import url("fineprint.css"); */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: red;
+      }
+      h1 {
+        background: green;
+        font-size: 12px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 data-any="ant: 1; ant: 2;" style="border: 10px solid gray">
+      hello world>
+    </h1>
+    <style>
+      .any {
+        color: red;
+      }
+    </style>
+    <script>
+      let st = "@import url('./any.css')";
+      let theUrl = "https://" + window.location.hostname;
+      async function getAllStyles() {
+        document.querySelectorAll("style").forEach(async (one) => {
+          await inlineSt(one.innerHTML);
+          one.remove();
+          // console.log(cssStyle.replace(/\/\*[^]*?\*\//g, ""));
+        });
+        document.querySelectorAll("link").forEach(async (one) => {
+          if (one.rel === "stylesheet") {
+            theUrl = one.href;
+            await inlineSt(`@import url('${one.href}')`);
+            // .match(/(\/[^\/]*\.css)/gi
+            one.remove();
+          }
+        });
+        return "nothing at all {}";
+      }
+      function setAnAtt(elm, attName, dataAttName, res, i) {
+        let arr = [...elm.split(",")];
+        arr.forEach((elementt) => {
+          if (!elementt.match(/^\d/)) {
+            let theElm = document.querySelectorAll(elementt);
+            if (theElm) {
+              theElm.forEach((one) => {
+                one.setAttribute(
+                  // setting the media attribute
+                  attName + dataAttName.trim(),
+                  setTheCssStyle()
+                );
+                function setTheCssStyle() {
+                  let inlineCss =
+                      one.getAttribute(attName + dataAttName.trim()) ||
+                      "/**/pointer-events: default;",
+                    arr = inlineCss.split("/**/"),
+                    finalRes = [];
+                  console.log("ggggg", arr);
+                  if (arr[arr.length - 1].trim().length < 3) {
+                    arr.pop();
+                    console.log(arr);
+                  }
+                  if (arr.length > 1) {
+                    console.log("oihbohoho", arr);
+                    for (let LL = 0; LL < arr.length - 1; LL++) {
+                      console.log("onono");
+                      finalRes.push(arr[LL]);
+                    }
+                  }
+                  finalRes.push(res[i + 1][0]);
+                  finalRes.push(arr[arr.length - 1]);
+                  let lastThing = finalRes.join("/**/");
+
+                  // res[i + 1][0] + ";" + inlineCss;
+                  return lastThing;
+                }
+              });
+            }
+          }
+        });
+      }
+      async function fetchExternalCss(nwRes, res, i) {
+        if (nwRes.startsWith("@import")) {
+          let arr = nwRes.indexOf(";") > -1 ? nwRes.split(";") : [nwRes],
+            url;
+          // console.log("**", arr);
+          res[i] = arr; // the one who has the import line
+          if ((url = arr[0].match(/\(['"]([^]+\.css)['"]\)/))) {
+            // geting the url
+            if (!url[1].startsWith("http")) {
+              url[1] = theUrl + "/" + url;
+            }
+            let call = await fetch(url[1]), // geting data from external file
+              resp = await call.text();
+            await inlineSt(resp); // rerunning the function on the external file content
+          }
+        }
+      }
+      async function inlineSt(theHardSetSt) {
+        let str = theHardSetSt || (await getAllStyles());
+        console.log("the str", str);
+        str = str.replace(/(\/\*[^]*?\*\/|\/\/[.]+)/g, "");
+        str = str.trim().replace(/\r?\n|\r/g, ""); // getting rid of line breaks
+        // }
+        if (str && /^[\w@\.\#\s\*:]/.test(str)) {
+          // checking if there is words after cleaning the string from line breaks
+
+          let res = str.split("{").map((one) => one.split("}")), // the array we are  going to work with which has the style of [[import or media query, elem1], [style of elem1, elem2]] if there is an empty element in the middle of the sub array then that means the past media query has finished
+            i = 0, // the iterator
+            dataAttName = ""; // if it has a value, then a media query will start
+          console.log("the res", res);
+
+          do {
+            if (res[i].length > 2) {
+              res[i].forEach((one) => {
+                fetchExternalCss(one);
+              });
+            }
+            let nwRes = res[i][res[i].length - 1].trim(); // name of the last index. it could be element or media query
+            // console.log(nwRes);
+            if (res[i].length > 1 && res[i][res[i].length - 2].trim() === "") {
+              // checking if the second element of the current sub arrayh is an empty element to set a new media query
+              dataAttName = "";
+            }
+            fetchExternalCss(nwRes, res, i);
+            nwRes = res[i][res[i].length - 1].trim();
+            // console.log("any", nwRes);
+            if (/^[\.#\w\*]/.test(nwRes.trim())) {
+              // the changed line
+              // tests if the line starts with . for class, # for id, a-z for the tag name
+              if (res[i].length == 1 && res[i - 1]) {
+                // checking if the array has a single elements and sets query if that is right
+                let mediaDimensions =
+                  res[i - 1][res[i - 1].length - 1].match(/\(([^]+?)\)/g) || []; // isolating the (max-width: 100px) and (min-height: 100px)
+                dataAttName = "";
+                mediaDimensions.forEach((one, ind) => {
+                  dataAttName += one
+                    .slice(1, one.length - 1)
+                    .split(":")
+                    .join("-")
+                    .replace(/\s/g, "");
+                  if (ind != mediaDimensions.length - 1) {
+                    // checking if there are other media query rules
+                    dataAttName += "-and-";
+                  }
+                });
+              }
+              if (dataAttName.length > 0) {
+                // checking if we are in a media query state
+                setAnAtt(nwRes, "data-media-", dataAttName, res, i);
+              } else {
+                setAnAtt(nwRes, "style", dataAttName, res, i);
+              }
+            }
+            i++; // increasing the iterator by one
+          } while (res[i] && res[i][res[i].length - 1]);
+        }
+
+        theUrl = "https://" + window.location.hostname;
+      }
+
+      window.addEventListener("DOMContentLoaded", async (e) => {
+        // applying our function only after the page is loaded
+        // console.log("DOM fully loaded and parsed");
+        try {
+          await inlineSt();
+        } catch (error) {
+          console.log(error);
+        }
+      });
+
+      // console.log("blabla", [..."body h1".split(",")]);
+    </script>
+  </body>
+</html>

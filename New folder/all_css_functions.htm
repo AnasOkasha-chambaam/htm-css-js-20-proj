@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --any: red;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 3px;
+        background-color: #333;
+      }
+
+      h1 {
+        color: #333;
+        padding: 10px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        padding: 11px;
+      }
+    </style>
+    <title>CSS to classes</title>
+  </head>
+
+  <body>
+    <h1>Hello ALL</h1>
+    <h1
+      style="
+        color: green;
+        background-color: red;
+        color: white;
+        color: #f4f4f4;
+        background-color: transparent;
+        border: 1px solid #f4f4f4;
+      "
+    >
+      Hello ALL
+    </h1>
+    <script>
+      // start of inlining function
+
+      let st = "@import url('./any.css')";
+      let theUrl = "https://" + window.location.hostname;
+      async function getAllStyles() {
+        document.querySelectorAll("style").forEach(async (one) => {
+          await inlineSt(one.innerHTML);
+          one.remove();
+          // console.log(cssStyle.replace(/\/\*[^]*?\*\//g, ""));
+        });
+        document.querySelectorAll("link").forEach(async (one) => {
+          if (one.rel === "stylesheet") {
+            theUrl = one.href;
+            await inlineSt(`@import url('${one.href}')`);
+            // .match(/(\/[^\/]*\.css)/gi
+            one.remove();
+          }
+        });
+        return "nothing at all {}";
+      }
+      function setAnAtt(elm, attName, dataAttName, res, i) {
+        let arr = [...elm.split(",")];
+        arr.forEach((elementt) => {
+          if (!elementt.match(/^\d/)) {
+            let theElm = document.querySelectorAll(elementt);
+            if (theElm) {
+              theElm.forEach((one) => {
+                one.setAttribute(
+                  // setting the media attribute
+                  attName + dataAttName.trim(),
+                  setTheCssStyle()
+                );
+                function setTheCssStyle() {
+                  let inlineCss =
+                      one.getAttribute(attName + dataAttName.trim()) ||
+                      "/**/pointer-events: default;",
+                    arr = inlineCss.split("/**/"),
+                    finalRes = [];
+                  console.log("ggggg", arr);
+                  if (arr[arr.length - 1].trim().length < 3) {
+                    arr.pop();
+                    console.log(arr);
+                  }
+                  if (arr.length > 1) {
+                    console.log("oihbohoho", arr);
+                    for (let LL = 0; LL < arr.length - 1; LL++) {
+                      console.log("onono");
+                      finalRes.push(arr[LL]);
+                    }
+                  }
+                  finalRes.push(res[i + 1][0]);
+                  finalRes.push(arr[arr.length - 1]);
+                  let lastThing = finalRes.join("/**/");
+
+                  // res[i + 1][0] + ";" + inlineCss;
+                  return lastThing;
+                }
+              });
+            }
+          }
+        });
+      }
+      async function fetchExternalCss(nwRes, res, i) {
+        if (nwRes.startsWith("@import")) {
+          let arr = nwRes.indexOf(";") > -1 ? nwRes.split(";") : [nwRes],
+            url;
+          // console.log("**", arr);
+          res[i] = arr; // the one who has the import line
+          if ((url = arr[0].match(/\(['"]([^]+\.css)['"]\)/))) {
+            // geting the url
+            if (!url[1].startsWith("http")) {
+              url[1] = theUrl + "/" + url;
+            }
+            let call = await fetch(url[1]), // geting data from external file
+              resp = await call.text();
+            await inlineSt(resp); // rerunning the function on the external file content
+          }
+        }
+      }
+      async function inlineSt(theHardSetSt) {
+        let str = theHardSetSt || (await getAllStyles());
+        console.log("the str", str);
+        str = str.replace(/(\/\*[^]*?\*\/|\/\/[.]+)/g, "");
+        str = str.trim().replace(/\r?\n|\r/g, ""); // getting rid of line breaks
+        // }
+        if (str && /^[\w@\.\#\s\*:]/.test(str)) {
+          // checking if there is words after cleaning the string from line breaks
+
+          let res = str.split("{").map((one) => one.split("}")), // the array we are  going to work with which has the style of [[import or media query, elem1], [style of elem1, elem2]] if there is an empty element in the middle of the sub array then that means the past media query has finished
+            i = 0, // the iterator
+            dataAttName = ""; // if it has a value, then a media query will start
+          console.log("the res", res);
+
+          do {
+            if (res[i].length > 2) {
+              res[i].forEach((one) => {
+                fetchExternalCss(one);
+              });
+            }
+            let nwRes = res[i][res[i].length - 1].trim(); // name of the last index. it could be element or media query
+            // console.log(nwRes);
+            if (res[i].length > 1 && res[i][res[i].length - 2].trim() === "") {
+              // checking if the second element of the current sub arrayh is an empty element to set a new media query
+              dataAttName = "";
+            }
+            fetchExternalCss(nwRes, res, i);
+            nwRes = res[i][res[i].length - 1].trim();
+            // console.log("any", nwRes);
+            if (/^[\.#\w\*]/.test(nwRes.trim())) {
+              // the changed line
+              // tests if the line starts with . for class, # for id, a-z for the tag name
+              if (res[i].length == 1 && res[i - 1]) {
+                // checking if the array has a single elements and sets query if that is right
+                let mediaDimensions =
+                  res[i - 1][res[i - 1].length - 1].match(/\(([^]+?)\)/g) || []; // isolating the (max-width: 100px) and (min-height: 100px)
+                dataAttName = "";
+                mediaDimensions.forEach((one, ind) => {
+                  dataAttName += one
+                    .slice(1, one.length - 1)
+                    .split(":")
+                    .join("-")
+                    .replace(/\s/g, "");
+                  if (ind != mediaDimensions.length - 1) {
+                    // checking if there are other media query rules
+                    dataAttName += "-and-";
+                  }
+                });
+              }
+              if (dataAttName.length > 0) {
+                // checking if we are in a media query state
+                setAnAtt(nwRes, "data-media-", dataAttName, res, i);
+              } else {
+                setAnAtt(nwRes, "style", dataAttName, res, i);
+              }
+            }
+            i++; // increasing the iterator by one
+          } while (res[i] && res[i][res[i].length - 1]);
+        }
+
+        theUrl = "https://" + window.location.hostname;
+      }
+
+      // end of inlining function
+
+      // start of setting the class array
+      function zeroPad(num, length = 6) {
+        num = "0" + num;
+        if (num.length >= length) {
+          return num;
+        }
+        return zeroPad(num, length);
+      }
+
+      let fruits = ["apple-fru", "orange", "cherry"];
+
+      let $t = [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+          "g",
+          "h",
+          "i",
+          "j",
+          "k",
+          "l",
+          "m",
+          "n",
+          "o",
+          "p",
+          "w",
+          "x",
+          "y",
+          "z",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "Y",
+          "Z",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "q",
+          "r",
+          "s",
+          "t",
+          "u",
+          "v",
+          "7",
+          "8",
+          "9",
+        ],
+        $pageK = [],
+        $encPageIDArray = [];
+
+      for (let key_1 in $t) {
+        if ($encPageIDArray.length > 2000) {
+          break;
+        }
+        for (let key_2 in $t) {
+          if ($encPageIDArray.length > 2000) {
+            break;
+          }
+          for (let key_3 in $t) {
+            if ($encPageIDArray.length > 2000) {
+              break;
+            }
+            for (let key_4 in $t) {
+              if ($encPageIDArray.length > 2000) {
+                break;
+              }
+              for (let key_5 in $t) {
+                if ($encPageIDArray.length > 2000) {
+                  break;
+                }
+                for (let key_6 in $t) {
+                  if ($encPageIDArray.length > 2000) {
+                    break;
+                  }
+                  $encPageIDArray.push(
+                    `${$t[key_1]}${$t[key_2]}${$t[key_3]}${$t[key_4]}${$t[key_5]}${$t[key_6]}`
+                  );
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+      // end of setting the class array
+      let rulesToClass = {}, // object  of rules and their classes
+        // rulesToClass => {'color:red':'abcdef'}
+        theIterator = 0; // to know the last digits that we used
+
+      function removeUnNessCss() {
+        let elms = document.querySelectorAll("*");
+        console.log(document.querySelectorAll("p")[1]);
+        elms.forEach((one) => {
+          if (one.getAttribute("style")) {
+            let inlineStyle = one
+                .getAttribute("style")
+                .replace(/\/\*\*\//g, ";")
+                .split(";")
+                .map((item) => item.split(":")),
+              checkedCSS = [];
+            inlineStyle.forEach((prop) => {
+              if (prop.length > 1) {
+                prop[0] = prop[0].trim();
+                prop[1] = prop[1].trim();
+
+                let newElm = document.createElement("div");
+                newElm.style.setProperty(prop[0], prop[1]);
+                document.body.append(newElm);
+                if (
+                  window.getComputedStyle(one).getPropertyValue(prop[0]) ===
+                    window.getComputedStyle(newElm).getPropertyValue(prop[0]) &&
+                  !checkedCSS.some((checkedOne) => checkedOne[0] === prop[0])
+                ) {
+                  checkedCSS.push(prop);
+                }
+
+                newElm.remove();
+              }
+            });
+            one.setAttribute(
+              "style",
+              checkedCSS.map((finProp) => finProp.join(":")).join(";")
+            );
+
+            console.log("==", one);
+          }
+        });
+      }
+
+      function setClassAndRemoveProp() {
+        let elms = document.querySelectorAll("*");
+        elms.forEach((one) => {
+          // now we are standing in one element
+          if (one.getAttribute("style")) {
+            // check if this element has inline style
+            let inlineStyle = one // this is our element
+              .getAttribute("style") //now we have the value of the style
+              .replace(/\r?\n|\r/g, "") // remove break lines
+              .split(";") // separate rules from each other
+              .map((item) => item.split(":")); // separate the name of the property from its value
+            inlineStyle.forEach((prop, ind) => {
+              // now we are looping in the properties
+              // prop => ['name', 'value']
+              if (prop.length > 1) {
+                prop[0] = prop[0].trim();
+                prop[1] = prop[1].trim();
+                inlineStyle[ind] = prop.join(":"); // rejoining the name and the value
+                prop = prop.join(":");
+                // prop => ['name:value']
+                if (!rulesToClass[`${prop}`]) {
+                  // check if there is a set style already or not
+                  rulesToClass[`${prop}`] = $encPageIDArray[theIterator];
+                  theIterator++;
+                }
+                one.classList.add(rulesToClass[`${prop}`]); // add the class to the current element
+              }
+            });
+            one.removeAttribute("style");
+          }
+        });
+        let theNewStyleTag = document.createElement("style");
+        for (let aProp in rulesToClass) {
+          theNewStyleTag.innerHTML += `.${rulesToClass[`${aProp}`]} {${aProp}}`;
+        }
+        document.head.appendChild(theNewStyleTag);
+      }
+      window.addEventListener("DOMContentLoaded", async (e) => {
+        await inlineSt();
+
+        // start of getting rid of unapplied rules
+        removeUnNessCss();
+        // end of getting rid of unapplied rules
+
+        // start of replacing function
+        setClassAndRemoveProp();
+        // end of replacing function
+      });
+    </script>
+  </body>
+</html>

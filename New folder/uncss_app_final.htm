@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .any {
+        color: #f4f4f4;
+        background: #333;
+      }
+      p {
+        font-size: 22px;
+      }
+    </style>
+    <title>the final app</title>
+  </head>
+  <body>
+    <h1 class="any" style="background: red; background: green; padding: 20 px">
+      Hello World >>>
+    </h1>
+
+    <p>this is p</p>
+    <p style="color: green">this is p</p>
+    <script>
+      function removeUnNessCss() {
+        let elms = document.querySelectorAll("*");
+        console.log(document.querySelectorAll("p")[1]);
+        elms.forEach((one) => {
+          if (one.getAttribute("style")) {
+            let inlineStyle = one
+                .getAttribute("style")
+                .replace(/\/\*\*\//g, ";")
+                .split(";")
+                .map((item) => item.split(":")),
+              checkedCSS = [];
+            inlineStyle.forEach((prop) => {
+              if (prop.length > 1) {
+                prop[0] = prop[0].trim();
+                prop[1] = prop[1].trim();
+
+                let newElm = document.createElement("div");
+                newElm.style.setProperty(prop[0], prop[1]);
+                document.body.append(newElm);
+                if (
+                  window.getComputedStyle(one).getPropertyValue(prop[0]) ===
+                    window.getComputedStyle(newElm).getPropertyValue(prop[0]) &&
+                  !checkedCSS.some((checkedOne) => checkedOne[0] === prop[0])
+                ) {
+                  checkedCSS.push(prop);
+                }
+
+                newElm.remove();
+              }
+            });
+            one.setAttribute(
+              "style",
+              checkedCSS.map((finProp) => finProp.join(":")).join(";")
+            );
+
+            console.log("==", one);
+          }
+        });
+      }
+
+      window.addEventListener("DOMContentLoaded", (e) => {
+        removeUnNessCss();
+      });
+    </script>
+  </body>
+</html>

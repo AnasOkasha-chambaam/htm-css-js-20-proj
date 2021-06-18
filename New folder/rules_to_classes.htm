@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 3px;
+        background-color: #333;
+      }
+
+      h1 {
+        color: #333;
+        padding: 10px;
+        background-color: #f4f4f4;
+      }
+    </style>
+    <title>CSS to classes</title>
+  </head>
+
+  <body>
+    <h1>Hello ALL</h1>
+    <h1
+      style="
+        color: green;
+        background-color: red;
+        color: white;
+        color: #f4f4f4;
+        background-color: transparent;
+        border: 1px solid #f4f4f4;
+      "
+    >
+      Hello ALL
+    </h1>
+    <script>
+      // start of setting the class array
+      let $t = [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+          "g",
+          "h",
+          "i",
+          "j",
+          "k",
+          "l",
+          "m",
+          "n",
+          "o",
+          "p",
+          "w",
+          "x",
+          "y",
+          "z",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "I",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "O",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "Y",
+          "Z",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "q",
+          "r",
+          "s",
+          "t",
+          "u",
+          "v",
+          "7",
+          "8",
+          "9",
+        ],
+        $encPageIDArray = [];
+
+      for (let key_1 in $t) {
+        if ($encPageIDArray.length > 2000) {
+          break;
+        }
+        for (let key_2 in $t) {
+          if ($encPageIDArray.length > 2000) {
+            break;
+          }
+          for (let key_3 in $t) {
+            if ($encPageIDArray.length > 2000) {
+              break;
+            }
+            for (let key_4 in $t) {
+              if ($encPageIDArray.length > 2000) {
+                break;
+              }
+              for (let key_5 in $t) {
+                if ($encPageIDArray.length > 2000) {
+                  break;
+                }
+                for (let key_6 in $t) {
+                  if ($encPageIDArray.length > 2000) {
+                    break;
+                  }
+                  $encPageIDArray.push(
+                    `${$t[key_1]}${$t[key_2]}${$t[key_3]}${$t[key_4]}${$t[key_5]}${$t[key_6]}`
+                  );
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+      // end of setting the class array
+      let rulesToClass = {}, // object  of rules and their classes
+        // rulesToClass => {'color:red':'abcdef'}
+        theIterator = 0; // to know the last digits that we used
+      window.addEventListener("DOMContentLoaded", (e) => {
+        let elms = document.querySelectorAll("*");
+        elms.forEach((one) => {
+          // now we are standing in one element
+          if (one.getAttribute("style")) {
+            // check if this element has inline style
+            let inlineStyle = one // this is our element
+              .getAttribute("style") //now we have the value of the style
+              .replace(/\r?\n|\r/g, "") // remove break lines
+              .split(";") // separate rules from each other
+              .map((item) => item.split(":")); // separate the name of the property from its value
+            inlineStyle.forEach((prop, ind) => {
+              // now we are looping in the properties
+              // prop => ['name', 'value']
+              if (prop.length > 1) {
+                prop[0] = prop[0].trim();
+                prop[1] = prop[1].trim();
+                inlineStyle[ind] = prop.join(":"); // rejoining the name and the value
+                prop = prop.join(":");
+                // prop => ['name:value']
+                if (!rulesToClass[`${prop}`]) {
+                  // check if there is a set style already or not
+                  rulesToClass[`${prop}`] = $encPageIDArray[theIterator];
+                  theIterator++;
+                }
+                one.classList.add(rulesToClass[`${prop}`]); // add the class to the current element
+              }
+            });
+            one.removeAttribute("style");
+          }
+        });
+        let theNewStyleTag = document.createElement("style");
+        for (let aProp in rulesToClass) {
+          theNewStyleTag.innerHTML += `.${rulesToClass[`${aProp}`]} {${aProp}}`;
+        }
+        document.head.appendChild(theNewStyleTag);
+      });
+    </script>
+  </body>
+</html>
