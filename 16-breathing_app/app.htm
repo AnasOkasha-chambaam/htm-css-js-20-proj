@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="app.css" />
+    <title>Breathing App</title>
+  </head>
+  <body>
+    <div class="container">
+      <span class="filter"> </span>
+      <div class="app" id="app">
+        <div class="circle" id="circle"></div>
+        <div class="gradient-circle" id="gradient_circle"></div>
+        <p id="action">Breathe</p>
+      </div>
+      <div class="btns" id="test_btns">
+        <form id="time-setter">
+          <input type="number" id="in-t" />
+          <input type="number" id="hold-t" />
+          <input type="number" id="out-t" />
+          <button id="start">set time</button>
+        </form>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

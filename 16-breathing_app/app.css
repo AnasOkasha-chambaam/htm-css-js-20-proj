@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Allerta+Stencil&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #333;
+  background: url("https://source.unsplash.com/3vv1A8zNG9A/1920x2827") no-repeat
+    center center/cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Allerta Stencil", sans-serif;
+  padding: 40px 0;
+}
+
+.filter {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  backdrop-filter: blur(2.5px);
+}
+
+.container *:not(.filter) {
+  z-index: 1;
+}
+
+.app {
+  width: 280px;
+  height: 280px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+  font-size: 23px;
+  animation: scale-anim 14s linear infinite;
+}
+
+.app .circle,
+.app .gradient-circle {
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  border-radius: 50%;
+  border: 10px solid rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-clip: padding-box;
+}
+
+.app .circle {
+  animation: circle-anim 14s linear infinite;
+}
+
+.app .gradient-circle {
+  background: conic-gradient(
+    #f6bd60 0%,
+    #f6bd60 28.5%,
+    #cb997e 28.5%,
+    #cb997e 42.5%,
+    #f7ede2 42.5%,
+    #f7ede2 100%,
+    #f6bd60 100%
+  );
+  /* background: #f7ede2; */
+  border: none;
+  background-clip: border-box;
+  z-index: 0;
+}
+
+.app .circle::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  top: 0;
+  background-color: #ffe5d9;
+  border-radius: 50%;
+  transform: translate(-50%, -190%);
+}
+
+.btns {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+#time-setter {
+  width: 150px;
+  height: 37px;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: 0;
+  border-radius: 50px;
+  overflow: hidden;
+  transition: width 0.4s cubic-bezier(0.55, -0.03, 0, 0.98);
+}
+
+#time-setter.active {
+  width: 302px;
+}
+
+#time-setter input {
+  width: 50px;
+  height: 100%;
+  display: block;
+  outline: none;
+  border: none;
+  padding: 8px;
+}
+
+#time-setter input {
+  border: 1px solid gray;
+}
+
+#time-setter input:first-of-type {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+
+#time-setter input:last-of-type {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.btns #time-setter #start {
+  width: 150px;
+  height: 37px;
+  font-family: "Ubuntu Mono";
+  border: none;
+  background: #333;
+  color: white;
+  font-size: 14px;
+  transition: 0.4s;
+  cursor: pointer;
+  border-radius: 50px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.btns #time-setter #start:hover {
+}
+@keyframes circle-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  28.5% {
+    transform: rotate(102.6deg);
+  }
+  42.5% {
+    transform: rotate(153deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale-anim {
+  0% {
+    transform: scale(1);
+  }
+  28.5% {
+    transform: scale(1.1);
+  }
+  42.5% {
+    transform: scale(1.1);
+  }
+  97% {
+    transform: scale(1);
+  }
+}
