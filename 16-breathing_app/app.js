@@ -1,3 +1,19 @@
+function getElmDimensions(element) {
+  let yAxis = window.innerHeight / 2,
+    xAxis = window.innerWidth / 2;
+  if (typeof element === typeof new Array() && element.length == 2) {
+    return [element[0] - xAxis, yAxis - element[1]];
+  }
+  return [
+    element.getBoundingClientRect().left +
+      element.getBoundingClientRect().width / 2 -
+      xAxis,
+    yAxis -
+      element.getBoundingClientRect().bottom +
+      element.getBoundingClientRect().height / 2,
+  ];
+}
+
 const TimeSetterForm = document.getElementById("time-setter"),
   inT = document.getElementById("in-t"),
   holdT = document.getElementById("hold-t"),
@@ -71,4 +87,21 @@ startBtn.addEventListener("click", function (e) {
   this.innerText = "Set Time";
   this.setAttribute("type", "button");
   setDurations(inT.value, holdT.value, outT.value);
+});
+
+app_cont.addEventListener("mousemove", function (e) {
+  let mousePos = getElmDimensions([e.pageX, e.pageY]),
+    elemenetPos = getElmDimensions(this),
+    mouseToElmPos = [
+      mousePos[0] - elemenetPos[0],
+      mousePos[1] - elemenetPos[1],
+    ];
+
+  this.style.transform = `rotateX(${mouseToElmPos[1] / 9}deg) rotateY(${
+    mouseToElmPos[0] / 9
+  }deg)`;
+});
+
+app_cont.addEventListener("mouseleave", function (e) {
+  this.style.transform = `rotateX(0deg) rotateY(0deg)`;
 });
